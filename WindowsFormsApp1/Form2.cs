@@ -63,7 +63,19 @@ namespace WindowsFormsApp1
             {
                 for (int i = 0; i < NumAEC; i++)
                 {
-
+                    LocationX[i] = new TextBox();
+                    LocationY[i] = new TextBox();
+                    LocationX[i].Location = new System.Drawing.Point(320, 35 * i + 20);
+                    LocationX[i].Size = new System.Drawing.Size(40, 20);
+                    LocationY[i].Location = new System.Drawing.Point(380,35*i+20);
+                    LocationY[i].Size = new System.Drawing.Size(40,20);
+                    if (i >= 4 )
+                    {
+                        LocationX[i].Location = new System.Drawing.Point(620, 35 * (i-4) + 20);
+                        LocationY[i].Location = new System.Drawing.Point(680, 35 * (i-4) + 20);
+                    }
+                    this.Controls.Add(LocationX[i]);
+                    this.Controls.Add(LocationY[i]);
                 }
             }
 
