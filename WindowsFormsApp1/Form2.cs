@@ -24,32 +24,25 @@ namespace WindowsFormsApp1
             LocationX = new TextBox[NumAEC];
             LocationY = new TextBox[NumAEC];
             R = new int[NumAEC];
+
             for (int i = 0; i < NumAEC; i++)
             {
+                Label l1 = new Label();
+                l1.Location = new System.Drawing.Point(50, 35 * i + 20);
+
                 Radius[i] = new TextBox();
                 Radius[i].Location = new System.Drawing.Point(200, 35 * i + 20);
                 if (i >= 4)
                 {
                     Radius[i].Location = new System.Drawing.Point(500, 35 * (i - 4) + 20);
+                    l1.Location = new System.Drawing.Point(350, 35 * (i - 4) + 20);
                 }
                 this.Controls.Add(Radius[i]); // Добавляем текстовое поле на форму
                 Radius[i].TextChanged += RadiusTextBox_TextChanged;
-            }
-            
-            for (int i = 0; i < NumAEC; i++)
-            {
-                Label l1 = new Label();
-                l1.Location = new System.Drawing.Point(50, 35 * i + 20);
-                if (i >= 4)
-                {
-                    l1.Location = new System.Drawing.Point(350, 35 * (i - 4) + 20);
-                }
                 l1.AutoSize = true;
                 l1.Text = $"Введіть радіус для R {i + 1}";
                 this.Controls.Add(l1);
-            }
-            for (int i = 0; i < NumAEC; i++)
-            {
+
                 if (!string.IsNullOrEmpty(Radius[i].Text))
                 {
                     if (int.TryParse(Radius[i].Text, out int b))
@@ -58,6 +51,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+            
 
             if (checked2 == true)
             {
