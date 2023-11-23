@@ -136,11 +136,12 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(177, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Введіть кількість АЕС (макс 8 шт)";
+            this.label3.Text = "Введіть кількість АЕС (макс 6 шт)";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(287, 264);
+            this.textBox2.Location = new System.Drawing.Point(353, 264);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 4;
@@ -151,9 +152,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(70, 267);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(214, 13);
+            this.label4.Size = new System.Drawing.Size(280, 13);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Введіть кількість пунктів спостереження";
+            this.label4.Text = "Введіть кількість пунктів спостереження (макс 10 шт)";
             // 
             // Form1
             // 

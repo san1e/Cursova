@@ -92,9 +92,15 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2(NumAEC, checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked);
+            Form2 f2 = new Form2(NumAEC,NumOP, checkBox2.Checked, checkBox4.Checked);
+            f2.AutoSize = true;
             f2.Show();
 
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
 
         }
     }
