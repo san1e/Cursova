@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+            
         }
       
         private void Form1_Load(object sender, EventArgs e)
@@ -45,6 +46,7 @@ namespace WindowsFormsApp1
 
         public void textBox1_TextChanged(object sender, EventArgs e)
         {
+            textBox1.KeyPress += textBox_KeyPress;
             if (!string.IsNullOrEmpty(textBox1.Text))
             {
                 if (int.TryParse(textBox1.Text, out int a))
@@ -59,6 +61,7 @@ namespace WindowsFormsApp1
 
         public void textBox2_TextChanged(object sender, EventArgs e)
         {
+            textBox2.KeyPress += textBox_KeyPress;
             if (!string.IsNullOrEmpty(textBox2.Text))
             {
                 if (int.TryParse(textBox2.Text, out int b))
@@ -90,11 +93,51 @@ namespace WindowsFormsApp1
             }
         }
 
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Перевірка чи натискана клавіша є цифрою або клавішею Backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ігноруємо введення, якщо це не цифра або Backspace
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2(NumAEC,NumOP, checkBox2.Checked, checkBox4.Checked);
-            f2.AutoSize = true;
-            f2.Show();
+            if (checkBox1.Checked == false && checkBox2.Checked == false)
+            {
+                MessageBox.Show("Оберіть варіант заповнення для АЕС");
+            }
+            else if (checkBox3.Checked == false && checkBox4.Checked == false)
+            {
+                MessageBox.Show("Оберіть варіант заповнення для ПС");
+            }
+            else if (NumAEC > 6 )
+            {
+                MessageBox.Show("Введіть меньшу кількість АЕС");
+
+            }
+            else if (NumOP > 10 )
+            {
+                MessageBox.Show("Введіть меньшу кількість ПС");
+
+            }
+            else if (NumAEC == 0)
+            {
+                MessageBox.Show("Введіть кількість АЕС");
+
+            }
+            else if (NumOP==0)
+            {
+                MessageBox.Show("Введіть кількість ПС");
+
+            }
+            else
+            {
+                Form2 f2 = new Form2(NumAEC, NumOP, checkBox2.Checked, checkBox4.Checked);
+                f2.AutoSize = true;
+                f2.Show();
+            }
 
 
         }

@@ -44,31 +44,31 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Montserrat SemiBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label1.Location = new System.Drawing.Point(58, 223);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(549, 29);
+            this.label1.Size = new System.Drawing.Size(522, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Заповнення координат пунктів спостереження";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Montserrat SemiBold", 15.75F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
             this.label2.Location = new System.Drawing.Point(58, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(329, 29);
+            this.label2.Size = new System.Drawing.Size(315, 25);
             this.label2.TabIndex = 1;
             this.label2.Text = "Заповнення координат АЕС";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkBox1.Location = new System.Drawing.Point(73, 153);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(144, 25);
+            this.checkBox1.Size = new System.Drawing.Size(130, 22);
             this.checkBox1.TabIndex = 2;
             this.checkBox1.Text = "Автоматично";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -77,10 +77,10 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold);
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.checkBox2.Location = new System.Drawing.Point(73, 195);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(93, 25);
+            this.checkBox2.Size = new System.Drawing.Size(81, 22);
             this.checkBox2.TabIndex = 2;
             this.checkBox2.Text = "Вручну";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -89,10 +89,10 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkBox3.Location = new System.Drawing.Point(73, 302);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(144, 25);
+            this.checkBox3.Size = new System.Drawing.Size(130, 22);
             this.checkBox3.TabIndex = 2;
             this.checkBox3.Text = "Автоматично";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -101,10 +101,10 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold);
+            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.checkBox4.Location = new System.Drawing.Point(73, 344);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(93, 25);
+            this.checkBox4.Size = new System.Drawing.Size(81, 22);
             this.checkBox4.TabIndex = 2;
             this.checkBox4.Text = "Вручну";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Montserrat Medium", 11.25F, System.Drawing.FontStyle.Bold);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
             this.button1.Location = new System.Drawing.Point(353, 358);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 47);
