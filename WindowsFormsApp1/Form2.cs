@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace WindowsFormsApp1
 {
@@ -24,7 +25,9 @@ namespace WindowsFormsApp1
         public int[] YAEC;
         public int[] XOP;
         public int[] YOP;
-        public Form2(int NumAEC,int NumOP, bool checked2, bool checked4)
+        int NAEC;
+        int NOP;
+        public Form2(int NumAEC,int NumOP,bool checekd1, bool checked2,bool checked3, bool checked4)
         {
             InitializeComponent();
             Radius = new TextBox[NumAEC];
@@ -33,9 +36,18 @@ namespace WindowsFormsApp1
             LocationOPX= new TextBox[NumOP];
             LocationOPY= new TextBox[NumOP];
             R = new int[NumAEC];
+            XAEC = new int[NumAEC];
+            YAEC = new int[NumAEC];
+            XOP = new int[NumOP];
+            YOP = new int[NumOP];
+            NAEC = NumAEC ;
+            NOP = NumOP;
+            Random rnd = new Random();
+
 
             Label l3;
             Label l4;
+            b1.Click += b1_Click;
 
             for (int i = 0; i < NumAEC; i++)
             {
@@ -48,25 +60,26 @@ namespace WindowsFormsApp1
                 
                 Radius[i] = new TextBox();
                 Radius[i].Location = new System.Drawing.Point(200, 35 * i + 20);
-
-                if (i >= 3)
+                
+                if (i >= 2)
                 {
                     
                     if (checked2 == true)
                     {
-                        l1.Location = new System.Drawing.Point(450, 35 * (i - 3) + 20);
-                        Radius[i].Location = new System.Drawing.Point(600, 35 * (i - 3) + 20);
+                        l1.Location = new System.Drawing.Point(450, 35 * (i - 2) + 20);
+                        Radius[i].Location = new System.Drawing.Point(600, 35 * (i - 2) + 20);
                     }
                     else 
                     {
-                        Radius[i].Location = new System.Drawing.Point(500, 35 * (i - 3) + 20);
-                        l1.Location = new System.Drawing.Point(350, 35 * (i - 3) + 20);
+                        Radius[i].Location = new System.Drawing.Point(500, 35 * (i - 2) + 20);
+                        l1.Location = new System.Drawing.Point(350, 35 * (i - 2) + 20);
                     }
                     
                 }
                 this.Controls.Add(Radius[i]); // Добавляем текстовое поле на форму
                 this.Controls.Add(l1);
                 this.Controls.Add(b1);
+                Radius[i].KeyPress += textBox_KeyPress;
                 Radius[i].TextChanged += RadiusTextBox_TextChanged;
 
                 if (!string.IsNullOrEmpty(Radius[i].Text))
@@ -77,7 +90,16 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            
+
+            if (checekd1== true)
+            {
+                for (int i = 0; i < NumAEC; i++)
+                {
+                    
+                    XAEC[i] = rnd.Next(1, 15)*50;
+                    YAEC[i] = rnd.Next(1, 15)*50;
+                }
+            }
             //ручне введення координатів АЕС
             if (checked2 == true)
             {
@@ -102,10 +124,10 @@ namespace WindowsFormsApp1
                     LocationY[i].Location = new System.Drawing.Point(380,35*i+20);
                     LocationY[i].Size = new System.Drawing.Size(40,20);
 
-                    if (i >= 3 )
+                    if (i >= 2 )
                     {
-                        LocationX[i].Location = new System.Drawing.Point(720, 35 * (i-3) + 20);
-                        LocationY[i].Location = new System.Drawing.Point(780, 35 * (i - 3) + 20);
+                        LocationX[i].Location = new System.Drawing.Point(720, 35 * (i-2) + 20);
+                        LocationY[i].Location = new System.Drawing.Point(780, 35 * (i - 2) + 20);
 
                         l3.Location = new System.Drawing.Point(730, 5);
                         l4.Location = new System.Drawing.Point(790, 5);
@@ -116,8 +138,12 @@ namespace WindowsFormsApp1
                     this.Controls.Add(l3);
                     this.Controls.Add(l4);
 
-                    LocationX[i].TextChanged += RadiusTextBox_TextChanged;
-                    LocationY[i].TextChanged += RadiusTextBox_TextChanged;
+                    LocationX[i].TextChanged += XAECTextBox_TextChanged;
+                    LocationY[i].TextChanged += YAECTextBox_TextChanged;
+
+                    LocationX[i].KeyPress += textBox_KeyPress;
+                    LocationY[i].KeyPress += textBox_KeyPress;
+
                     if (!string.IsNullOrEmpty(LocationX[i].Text)& !string.IsNullOrEmpty(LocationY[i].Text))
                     {
                         if (int.TryParse(LocationX[i].Text, out int x) & int.TryParse(LocationY[i].Text,out int y))
@@ -126,6 +152,15 @@ namespace WindowsFormsApp1
                             YAEC[i]=y;
                         }
                     }
+                }
+            }
+
+            if (checked3 == true)
+            {
+                for (int i = 0; i < NumOP; i++)
+                {
+                    XOP[i] = rnd.Next(1, 15)*50;
+                    YOP[i] = rnd.Next(1, 15)*50;
                 }
             }
 
@@ -176,9 +211,11 @@ namespace WindowsFormsApp1
                     this.Controls.Add(l4);
                     this.Controls.Add(b1);
 
-                    LocationOPX[i].TextChanged += RadiusTextBox_TextChanged;
-                    LocationOPY[i].TextChanged += RadiusTextBox_TextChanged;
+                    LocationOPX[i].TextChanged += XOPTextBox_TextChanged;
+                    LocationOPY[i].TextChanged += YOPTextBox_TextChanged;
 
+                    LocationOPX[i].KeyPress += textBox_KeyPress;
+                    LocationOPY[i].KeyPress += textBox_KeyPress;
                     if (!string.IsNullOrEmpty(LocationOPX[i].Text) & !string.IsNullOrEmpty(LocationOPY[i].Text))
                     {
                         if (int.TryParse(LocationOPX[i].Text, out int x) & int.TryParse(LocationOPY[i].Text, out int y))
@@ -200,19 +237,81 @@ namespace WindowsFormsApp1
             {
                 if (int.TryParse(textBox.Text, out int radiusValue))
                 {
-                    R[index] = radiusValue;
+                    R[index] = radiusValue*50;
                 }
             }
         }
-    
+
+        private void XAECTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
+            int index = Array.IndexOf(LocationX, textBox); // Находим индекс измененного TextBox
+            if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
+            {
+                if (int.TryParse(textBox.Text, out int Xcor))
+                {
+                    XAEC[index] = Xcor*50;
+                }
+            }
+        }
+
+        private void YAECTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
+            int index = Array.IndexOf(LocationY, textBox); // Находим индекс измененного TextBox
+            if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
+            {
+                if (int.TryParse(textBox.Text, out int Ycor))
+                {
+                    YAEC[index] = Ycor * 50;
+                }
+            }
+        }
+
+        private void XOPTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
+            int index = Array.IndexOf(LocationOPX, textBox); // Находим индекс измененного TextBox
+            if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
+            {
+                if (int.TryParse(textBox.Text, out int XOPcor))
+                {
+                    XOP[index] = XOPcor * 50;
+                }
+            }
+        }
+
+        private void YOPTextBox_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
+            int index = Array.IndexOf(LocationOPY, textBox); // Находим индекс измененного TextBox
+            if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
+            {
+                if (int.TryParse(textBox.Text, out int YOPcor))
+                {
+                    YOP[index] = YOPcor * 50;
+                }
+            }
+        }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Перевірка чи натискана клавіша є цифрою або клавішею Backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ігноруємо введення, якщо це не цифра або Backspace
+            }
+        }
+
         private void Form2_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void b1_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3(R);
+            Form3 f3 = new Form3(R,XAEC,YAEC,XOP,YOP,NAEC,NOP);
+            f3.AutoSize = true;
             f3.Show();
         }
 

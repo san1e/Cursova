@@ -136,7 +136,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(177, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Введіть кількість АЕС (макс 6 шт)";
+            this.label3.Text = "Введіть кількість АЕС (макс 4 шт)";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // textBox2

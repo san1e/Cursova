@@ -53,9 +53,7 @@ namespace WindowsFormsApp1
                 {
                     NumAEC = a;
                 }
-                else
-                {
-                }
+                
             }
         }
 
@@ -68,9 +66,7 @@ namespace WindowsFormsApp1
                 {
                     NumOP = b;
                 }
-                else
-                {
-                }
+               
             }
         }
 
@@ -104,40 +100,40 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == false && checkBox2.Checked == false)
-            {
-                MessageBox.Show("Оберіть варіант заповнення для АЕС");
-            }
-            else if (checkBox3.Checked == false && checkBox4.Checked == false)
-            {
-                MessageBox.Show("Оберіть варіант заповнення для ПС");
-            }
-            else if (NumAEC > 6 )
-            {
-                MessageBox.Show("Введіть меньшу кількість АЕС");
+            //if (checkBox1.Checked == false && checkBox2.Checked == false)
+            //{
+            //    MessageBox.Show("Оберіть варіант заповнення для АЕС");
+            //}
+            //else if (checkBox3.Checked == false && checkBox4.Checked == false)
+            //{
+            //    MessageBox.Show("Оберіть варіант заповнення для ПС");
+            //}
+            //else if (NumAEC > 4 )
+            //{
+            //    MessageBox.Show("Введіть меньшу кількість АЕС");
 
-            }
-            else if (NumOP > 10 )
-            {
-                MessageBox.Show("Введіть меньшу кількість ПС");
+            //}
+            //else if (NumOP > 10 )
+            //{
+            //    MessageBox.Show("Введіть меньшу кількість ПС");
 
-            }
-            else if (NumAEC == 0)
-            {
-                MessageBox.Show("Введіть кількість АЕС");
+            //}
+            //else if (NumAEC == 0)
+            //{
+            //    MessageBox.Show("Введіть кількість АЕС");
 
-            }
-            else if (NumOP==0)
-            {
-                MessageBox.Show("Введіть кількість ПС");
+            //}
+            //else if (NumOP==0)
+            //{
+            //    MessageBox.Show("Введіть кількість ПС");
 
-            }
-            else
-            {
-                Form2 f2 = new Form2(NumAEC, NumOP, checkBox2.Checked, checkBox4.Checked);
+            //}
+            //else
+            //{
+                Form2 f2 = new Form2(NumAEC, NumOP,checkBox1.Checked, checkBox2.Checked,checkBox3.Checked, checkBox4.Checked);
                 f2.AutoSize = true;
                 f2.Show();
-            }
+            //}
 
 
         }
