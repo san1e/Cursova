@@ -16,8 +16,6 @@ namespace WindowsFormsApp1
     {
         public PictureBox[] PicOP;
         public PictureBox[] PicAEC;
-        public Label[] L;
-        Graphics g;
         int[] XAEC_;
         int[] YAEC_;
         int[] R_;
@@ -70,35 +68,16 @@ namespace WindowsFormsApp1
 
             P_Op(NumOP, XOP, YOP);
             P_Aec(NumAEC, XAEC, YAEC, R);
-
-            int count = 0;
-
-            int[] res1 = new int[NumAEC];
-
-
-            //for (int i = 0; i < NumAEC; i++)
-            //{
-            //    int cx = XAEC_[i] - (R_[i]);
-            //    int cy = YAEC_[i] - (R_[i]);
-            //    for (int j = 0; j < NumOP; j++)
-            //    {
-            //        int x = XOP[j] - PicOP[j].Width / 2;
-            //        int y = YOP[j] - PicOP[j].Height / 2;
-            //        double dis = Math.Sqrt(Math.Pow(x - cx, 2) + Math.Pow(y - cy, 2));
-
-            //        if (dis <= R_[i])
-            //        {
-            //            count++;    
-            //        }
-            //    }
-            //}
-
-           
-
         }
         private void Form3_Load(object sender, EventArgs e)
         {
 
+        }
+
+        static bool IsPointInCircle(int pointX, int pointY, int circleX, int circleY, int radius)
+        {
+            double distance = Math.Sqrt(Math.Pow(pointX - circleX, 2) + Math.Pow(pointY - circleY, 2));
+            return distance <= radius;
         }
 
         private void Form3_Paint(object sender, PaintEventArgs e)
@@ -111,41 +90,72 @@ namespace WindowsFormsApp1
                 int y = YAEC_[i] - (R_[i]);
                 int R = R_[i];
                 g.DrawEllipse(new Pen(Color.Black,5), x, y, R*2, R*2);
-                g.FillEllipse(new SolidBrush(Color.Red), x,y, R*2, R*2);
+               // g.FillEllipse(new SolidBrush(Color.Red), x,y, R*2, R*2);
             }
             int count = 0;
             int[] res1 = new int[NumAEC_];
+            int opNotInAnyCircleCount = 0;
+            int opInMultipleCirclesCount = 0;
 
+            // Array to keep track of the circles each PicOP falls into
+            int[] circlesContainingOP = new int[PicOP.Length];
             // Проверка попадания PicOP в круг
             for (int i = 0; i < PicOP.Length; i++)
             {
                 int xPicOP = PicOP[i].Location.X + PicOP[i].Width / 2;
                 int yPicOP = PicOP[i].Location.Y + PicOP[i].Height / 2;
-                int n = 10;
+                Array.Clear(circlesContainingOP, 0, circlesContainingOP.Length);
+
                 for (int j = 0; j < NumAEC_; j++)
                 {
                     int xAEC = XAEC_[j];
                     int yAEC = YAEC_[j];
                     int radiusAEC = R_[j];
 
-                    double distance = Math.Sqrt(Math.Pow(xPicOP - xAEC, 2) + Math.Pow(yPicOP - yAEC, 2));
 
-                    if (distance <= radiusAEC)
+                    if (IsPointInCircle(xPicOP, yPicOP, xAEC, yAEC, radiusAEC))
                     {
                         res1[j]++;
+                        circlesContainingOP[i]++;
                     }
+
                 }
+                if (circlesContainingOP[i] == 0)
+                {
+                    opNotInAnyCircleCount++;
+                }
+
+                // Check if PicOP is in multiple circles
+                if (circlesContainingOP[i] > 1)
+                {
+                    opInMultipleCirclesCount++;
+                }
+
             }
+
+
 
             Label[] labels = new Label[NumAEC_];
             for (int i = 0; i < NumAEC_; i++)
             {
                 labels[i] = new Label();
-                labels[i].Location = new Point(800, 10 + i * 20);
+                labels[i].Location = new Point(800, 40 + i * 20);
                 labels[i].Text = $"Количество пс, попавших в АЕС {i + 1}: {res1[i]}";
                 labels[i].AutoSize = true;
                 Controls.Add(labels[i]);
             }
+
+            Label l = new Label();
+            l.Location = new Point(800, 20);
+            l.Text = $"Кількість пс які не використовуються {opNotInAnyCircleCount}";
+            l.AutoSize = true;
+            Controls.Add(l);
+
+            Label l1 = new Label();
+            l1.Location = new Point(800, 0);
+            l1.Text = $"Кількість пс які знаходяться на перетені {opInMultipleCirclesCount}";
+            l1.AutoSize = true;
+            Controls.Add(l1);
 
             for (int i = 50; i <= 750; i +=50)
             {
