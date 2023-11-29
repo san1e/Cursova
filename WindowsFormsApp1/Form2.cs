@@ -27,6 +27,8 @@ namespace WindowsFormsApp1
         public int[] YOP;
         int NAEC;
         int NOP;
+        bool ck2;
+        bool ck4;
         public Form2(int NumAEC,int NumOP,bool checekd1, bool checked2,bool checked3, bool checked4)
         {
             InitializeComponent();
@@ -42,6 +44,8 @@ namespace WindowsFormsApp1
             YOP = new int[NumOP];
             NAEC = NumAEC ;
             NOP = NumOP;
+            ck2 = checked2;
+            ck4 = checked4;
             Random rnd = new Random();
 
 
@@ -305,14 +309,89 @@ namespace WindowsFormsApp1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            if ((ck2 == true && ck4 == true) || (ck2 == true && ck4 == false) || (ck2==false&&ck4==true))
+            {
+                MessageBox.Show("Мінімум для Х і У = 1\nМаксимум для Х і У = 15\nМаксимальне значення для R = 7");
+
+            }
+            else
+            {
+                MessageBox.Show("Максимальне значення для R = 7");
+
+            }
+           
 
         }
 
         private void b1_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3(R,XAEC,YAEC,XOP,YOP,NAEC,NOP);
-            f3.AutoSize = true;
-            f3.Show();
+                bool validationFailed = false;
+            for (int i = 0; i < R.Length; i++)
+            {
+                if (R[i] > 7 * 50)
+                {
+                    MessageBox.Show($"Введіть меньше значення для R{i + 1}");
+                    validationFailed = true;
+                }
+                else if (XAEC[i] > 15 * 50)
+                {
+                    MessageBox.Show($"Введіть меньше значення для АЕС Х{i + 1}");
+                    validationFailed = true;
+                }
+                else if (YAEC[i] > 15 * 50)
+                {
+                    MessageBox.Show($"Введіть меньше значення для АЕС Y{i + 1}");
+                    validationFailed = true;
+                }
+                else if (R[i] == 0)
+                {
+                    MessageBox.Show($"Введіть значення для R{i + 1}");
+                    validationFailed = true;
+                }
+                else if (XAEC[i] == 0)
+                {
+                    MessageBox.Show($"Введіть значення для АЕС Х{i + 1}");
+                    validationFailed = true;
+                }
+                else if (YAEC[i]==0)
+                {
+                    MessageBox.Show($"Введіть значення для АЕС Y{i + 1}");
+                    validationFailed = true;
+                }
+
+            }
+
+            for (int i = 0; i < NOP; i++)
+            {
+                if (XOP[i] > 15 * 50)
+                {
+                    MessageBox.Show($"Введіть меньше значення для ПС Х{i + 1}");
+                    validationFailed = true;
+                }
+                else if (YOP[i] > 15 * 50)
+                {
+                    MessageBox.Show($"Введіть меньше значення для ПС Y{i + 1}");
+                    validationFailed = true;
+                }
+                else if (XOP[i]==0)
+                {
+                    MessageBox.Show($"Введіть значення для ПС Х{i + 1}");
+                    validationFailed = true;
+                }
+                else if (YOP[i]==0)
+                {
+                    MessageBox.Show($"Введіть значення для ПС Y{i + 1}");
+                    validationFailed = true;
+                }
+            }
+
+            if (!validationFailed)
+            {
+                Form3 f3 = new Form3(R, XAEC, YAEC, XOP, YOP, NAEC, NOP);
+                f3.AutoSize = true;
+                f3.Show();
+            }
+
         }
 
     }
