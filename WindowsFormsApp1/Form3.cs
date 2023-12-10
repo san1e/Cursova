@@ -23,7 +23,7 @@ namespace WindowsFormsApp1
         int[] YOP_;
         int NumAEC_;
         int NumOP_;
-        public void P_Aec(int NumAEC, int[] XAEC, int[] YAEC, int[] R)
+        public void P_Aec(int NumAEC, int[] XAEC, int[] YAEC)
         {
             PicAEC = new PictureBox[NumAEC];
             for (int i = 0; i < NumAEC; i++)
@@ -67,7 +67,7 @@ namespace WindowsFormsApp1
             this.NumOP_ = NumOP;
 
             P_Op(NumOP, XOP, YOP);
-            P_Aec(NumAEC, XAEC, YAEC, R);
+            P_Aec(NumAEC, XAEC, YAEC);
         }
         private void Form3_Load(object sender, EventArgs e)
         {
@@ -90,9 +90,7 @@ namespace WindowsFormsApp1
                 int y = YAEC_[i] - (R_[i]);
                 int R = R_[i];
                 g.DrawEllipse(new Pen(Color.Black,5), x, y, R*2, R*2);
-               // g.FillEllipse(new SolidBrush(Color.Red), x,y, R*2, R*2);
             }
-            int count = 0;
             int[] res1 = new int[NumAEC_];
             int opNotInAnyCircleCount = 0;
             int opInMultipleCirclesCount = 0;

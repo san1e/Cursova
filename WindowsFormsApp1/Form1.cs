@@ -31,6 +31,8 @@ namespace WindowsFormsApp1
             if (checkBox1.Checked)
             {
                 checkBox2.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
                 // Додаткова логіка, яка виконується, коли checkbox1 вибраний
             }
         }
@@ -40,6 +42,8 @@ namespace WindowsFormsApp1
             if (checkBox2.Checked)
             {
                 checkBox1.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
                 // Додаткова логіка, яка виконується, коли checkbox2 вибраний
             }
         }
@@ -76,6 +80,8 @@ namespace WindowsFormsApp1
             if (checkBox3.Checked)
             {
                 checkBox4.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
                 // Додаткова логіка, яка виконується, коли checkbox1 вибраний
             }
         }
@@ -85,6 +91,8 @@ namespace WindowsFormsApp1
             if (checkBox4.Checked)
             {
                 checkBox3.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
                 // Додаткова логіка, яка виконується, коли checkbox2 вибраний
             }
         }
@@ -100,11 +108,11 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == false && checkBox2.Checked == false)
+            if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox5.Checked == false)
             {
                 MessageBox.Show("Оберіть варіант заповнення для АЕС");
             }
-            else if (checkBox3.Checked == false && checkBox4.Checked == false)
+            else if (checkBox3.Checked == false && checkBox4.Checked == false && checkBox5.Checked == false)
             {
                 MessageBox.Show("Оберіть варіант заповнення для ПС");
             }
@@ -130,7 +138,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Form2 f2 = new Form2(NumAEC, NumOP, checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked);
+                Form2 f2 = new Form2(NumAEC, NumOP, checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked,checkBox5.Checked);
                 f2.AutoSize = true;
                 f2.Show();
             }
@@ -141,6 +149,38 @@ namespace WindowsFormsApp1
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                checkBox6.Checked = true;
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                checkBox4.Checked = false;
+            }
+            else if (checkBox5.Checked == false)
+            {
+                checkBox6.Checked = false;
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                checkBox5.Checked = true;
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                checkBox4.Checked = false;
+            }
+            else if (checkBox6.Checked == false)
+            {
+                checkBox5.Checked = false;
+            }
         }
     }
 }
