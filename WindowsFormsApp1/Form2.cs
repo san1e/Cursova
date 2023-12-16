@@ -82,7 +82,7 @@ namespace WindowsFormsApp1
                     }
                     
                 }
-                this.Controls.Add(Radius[i]); // Добавляем текстовое поле на форму
+                this.Controls.Add(Radius[i]); 
                 this.Controls.Add(l1);
                 this.Controls.Add(b1);
                 Radius[i].KeyPress += textBox_KeyPress;
@@ -237,8 +237,8 @@ namespace WindowsFormsApp1
         }
         private void RadiusTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
-            int index = Array.IndexOf(Radius, textBox); // Находим индекс измененного TextBox
+            TextBox textBox = (TextBox)sender;
+            int index = Array.IndexOf(Radius, textBox);
             if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
             {
                 if (int.TryParse(textBox.Text, out int radiusValue))
@@ -250,8 +250,8 @@ namespace WindowsFormsApp1
 
         private void XAECTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
-            int index = Array.IndexOf(LocationX, textBox); // Находим индекс измененного TextBox
+            TextBox textBox = (TextBox)sender; 
+            int index = Array.IndexOf(LocationX, textBox); 
             if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
             {
                 if (int.TryParse(textBox.Text, out int Xcor))
@@ -263,8 +263,8 @@ namespace WindowsFormsApp1
 
         private void YAECTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
-            int index = Array.IndexOf(LocationY, textBox); // Находим индекс измененного TextBox
+            TextBox textBox = (TextBox)sender;
+            int index = Array.IndexOf(LocationY, textBox);
             if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
             {
                 if (int.TryParse(textBox.Text, out int Ycor))
@@ -276,8 +276,8 @@ namespace WindowsFormsApp1
 
         private void XOPTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
-            int index = Array.IndexOf(LocationOPX, textBox); // Находим индекс измененного TextBox
+            TextBox textBox = (TextBox)sender; 
+            int index = Array.IndexOf(LocationOPX, textBox); 
             if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
             {
                 if (int.TryParse(textBox.Text, out int XOPcor))
@@ -289,8 +289,8 @@ namespace WindowsFormsApp1
 
         private void YOPTextBox_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender; // Получаем TextBox, вызвавший событие
-            int index = Array.IndexOf(LocationOPY, textBox); // Находим индекс измененного TextBox
+            TextBox textBox = (TextBox)sender; 
+            int index = Array.IndexOf(LocationOPY, textBox); 
             if (index != -1 && !string.IsNullOrEmpty(textBox.Text))
             {
                 if (int.TryParse(textBox.Text, out int YOPcor))
@@ -305,7 +305,7 @@ namespace WindowsFormsApp1
             // Перевірка чи натискана клавіша є цифрою або клавішею Backspace
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Ігноруємо введення, якщо це не цифра або Backspace
+                e.Handled = true; 
             }
         }
 
@@ -330,7 +330,7 @@ namespace WindowsFormsApp1
             bool validationFailed = false;
             for (int i = 0; i < R.Length; i++)
             {
-                if (R[i] > 7 * 50 && ck5 == false)
+                if (R[i] > 7 * 50)
                 {
                     MessageBox.Show($"Введіть меньше значення для R{i + 1}");
                     validationFailed = true;
@@ -345,7 +345,7 @@ namespace WindowsFormsApp1
                     MessageBox.Show($"Введіть меньше значення для АЕС Y{i + 1}");
                     validationFailed = true;
                 }
-                else if (R[i] == 0 && ck5 == false)
+                else if (R[i] == 0)
                 {
                     MessageBox.Show($"Введіть значення для R{i + 1}");
                     validationFailed = true;
@@ -393,7 +393,7 @@ namespace WindowsFormsApp1
                 f3.AutoSize = true;
                 f3.Show();
             }
-            else if (ck5 == true)
+            else if (!validationFailed && ck5 == true)
             {
                 Form4 f4 = new Form4(R,NAEC,NOP);
                 f4.AutoSize = true;

@@ -89,15 +89,16 @@ namespace WindowsFormsApp1
                 int x = XAEC_[i] - (R_[i]);
                 int y = YAEC_[i] - (R_[i]);
                 int R = R_[i];
-                g.DrawEllipse(new Pen(Color.Black,5), x, y, R*2, R*2);
+
+                Rectangle clipRect = new Rectangle(0, 0, 750, 750);
+                g.SetClip(clipRect);
+                g.DrawArc(new Pen(Color.Black, 5), x, y, R*2, R*2, 0, 360);
+                g.ResetClip();
             }
             int[] res1 = new int[NumAEC_];
             int opNotInAnyCircleCount = 0;
             int opInMultipleCirclesCount = 0;
-
-            // Array to keep track of the circles each PicOP falls into
             int[] circlesContainingOP = new int[PicOP.Length];
-            // Проверка попадания PicOP в круг
             for (int i = 0; i < PicOP.Length; i++)
             {
                 int xPicOP = PicOP[i].Location.X + PicOP[i].Width / 2;
@@ -123,7 +124,6 @@ namespace WindowsFormsApp1
                     opNotInAnyCircleCount++;
                 }
 
-                // Check if PicOP is in multiple circles
                 if (circlesContainingOP[i] > 1)
                 {
                     opInMultipleCirclesCount++;
@@ -138,20 +138,20 @@ namespace WindowsFormsApp1
             {
                 labels[i] = new Label();
                 labels[i].Location = new Point(800, 40 + i * 20);
-                labels[i].Text = $"Количество пс, попавших в АЕС {i + 1}: {res1[i]}";
+                labels[i].Text = $"Кількість пунктів спостереження, які потрапили в радіус АЕС {i + 1}: {res1[i]}";
                 labels[i].AutoSize = true;
                 Controls.Add(labels[i]);
             }
 
             Label l = new Label();
             l.Location = new Point(800, 20);
-            l.Text = $"Кількість пс які не використовуються {opNotInAnyCircleCount}";
+            l.Text = $"Кількість пунктів спостереження, які не використовуються: {opNotInAnyCircleCount}";
             l.AutoSize = true;
             Controls.Add(l);
 
             Label l1 = new Label();
             l1.Location = new Point(800, 0);
-            l1.Text = $"Кількість пс які знаходяться на перетені {opInMultipleCirclesCount}";
+            l1.Text = $"Кількість пунктів спостереження, які знаходяться на перетені: {opInMultipleCirclesCount}";
             l1.AutoSize = true;
             Controls.Add(l1);
 

@@ -33,7 +33,7 @@
             // 
             // b1
             // 
-            this.b1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.b1.Font = new System.Drawing.Font("Montserrat", 11.25F, System.Drawing.FontStyle.Bold);
             this.b1.Location = new System.Drawing.Point(318, 357);
             this.b1.Name = "b1";
             this.b1.Size = new System.Drawing.Size(113, 47);

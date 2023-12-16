@@ -360,10 +360,10 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold);
+            this.checkBox1.Font = new System.Drawing.Font("Montserrat", 11.25F, System.Drawing.FontStyle.Bold);
             this.checkBox1.Location = new System.Drawing.Point(828, 91);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(69, 26);
+            this.checkBox1.Size = new System.Drawing.Size(62, 25);
             this.checkBox1.TabIndex = 62;
             this.checkBox1.Text = "АЕС";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -372,10 +372,10 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold);
+            this.checkBox2.Font = new System.Drawing.Font("Montserrat", 11.25F, System.Drawing.FontStyle.Bold);
             this.checkBox2.Location = new System.Drawing.Point(827, 195);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(51, 22);
+            this.checkBox2.Size = new System.Drawing.Size(52, 25);
             this.checkBox2.TabIndex = 63;
             this.checkBox2.Text = "ПС";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -383,11 +383,12 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Montserrat", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(828, 245);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(124, 53);
             this.button1.TabIndex = 64;
-            this.button1.Text = "button1";
+            this.button1.Text = "ОТРИМАТИ РЕЗУЛЬТАТ";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -434,6 +435,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form4";
             this.Text = "Form4";
+            this.Load += new System.EventHandler(this.Form4_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

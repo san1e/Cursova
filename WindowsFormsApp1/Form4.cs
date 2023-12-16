@@ -44,38 +44,41 @@ namespace WindowsFormsApp1
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.X >= 0 && e.X <= 750 && e.Y >= 0 && e.Y <= 750)
             {
+                int roundedX = (int)(Math.Round((double)e.X / 50) * 50);
+                int roundedY = (int)(Math.Round((double)e.Y / 50) * 50);
 
-                if (checkBox1.Checked == true)
+                if (roundedX >= 0 && roundedX <= 750 && roundedY >= 0 && roundedY <= 750)
                 {
-                    if (XAEC.Count < NumAEC_)
+                    if (checkBox1.Checked == true)
                     {
-                        XAEC.Add(e.X);
-                        YAEC.Add(e.Y);
-                        P_AEC(e.X, e.Y);
+                        if (XAEC.Count < NumAEC_)
+                        {
+                            XAEC.Add(roundedX);
+                            YAEC.Add(roundedY);
+                            P_AEC(roundedX, roundedY);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Максимальна кількість АЕС");
+                        }
                     }
-                    else
+                    else if (checkBox2.Checked == true)
                     {
-                        MessageBox.Show("Максимальна кількість АЕС");
+                        if (XOP.Count < NumOP_)
+                        {
+                            XOP.Add(roundedX);
+                            YOP.Add(roundedY);
+                            P_OP(roundedX, roundedY);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Максимальна кількість OP");
+                        }
                     }
-
                 }
-                else if (checkBox2.Checked == true)
-                {
-                    if (XOP.Count < NumOP_)
-                    {
-                        XOP.Add(e.X);
-                        YOP.Add(e.Y);
-                        P_OP(e.X, e.Y);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Максимальна кількість OP");
-                    }
-                }
+                this.Invalidate();
             }
-            this.Invalidate();
         }
 
         private void P_AEC(int x, int y)
@@ -144,7 +147,6 @@ namespace WindowsFormsApp1
                     opNotInAnyCircleCount++;
                 }
 
-                // Check if PicOP is in multiple circles
                 if (circlesContainingOP[i] > 1)
                 {
                     opInMultipleCirclesCount++;
@@ -157,20 +159,20 @@ namespace WindowsFormsApp1
             {
                 labels[i] = new Label();
                 labels[i].Location = new Point(920, 40 + i * 20);
-                labels[i].Text = $"Количество пс, попавших в АЕС {i + 1}: {res1[i]}";
+                labels[i].Text = $"Кількість пунктів спостереження, які потрапили в радіус АЕС {i + 1}: {res1[i]}";
                 labels[i].AutoSize = true;
                 Controls.Add(labels[i]);
             }
 
             Label l = new Label();
             l.Location = new Point(920, 20);
-            l.Text = $"Кількість пс які не використовуються {opNotInAnyCircleCount}";
+            l.Text = $"Кількість пунктів спостереження, які не використовуються: {opNotInAnyCircleCount}";
             l.AutoSize = true;
             Controls.Add(l);
 
             Label l1 = new Label();
             l1.Location = new Point(920, 0);
-            l1.Text = $"Кількість пс які знаходяться на перетені {opInMultipleCirclesCount}";
+            l1.Text = $"Кількість пункітв спостереження, які знаходяться на перетені: {opInMultipleCirclesCount}";
             l1.AutoSize = true;
             Controls.Add(l1);
         }
@@ -195,18 +197,25 @@ namespace WindowsFormsApp1
                 int y = YAEC[i];
                 int radius = R_[i];
 
-                // Вычисление координат для круга
                 int circleX = x - radius;
                 int circleY = y - radius;
-                int circleDiameter = 2 * radius; 
-                e.Graphics.DrawEllipse(new Pen(Color.Black, 5), circleX, circleY, circleDiameter, circleDiameter);
+                int circleDiameter = 2 * radius;
 
+                Rectangle clipRect = new Rectangle(0, 0, 750, 750);
+                g.SetClip(clipRect);
+                g.DrawArc(new Pen(Color.Black, 5), circleX, circleY, circleDiameter, circleDiameter, 0, 360);
+                g.ResetClip();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Res();
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
