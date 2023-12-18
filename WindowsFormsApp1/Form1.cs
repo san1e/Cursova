@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
         {
 
         }
-
+        //автоматичне заповнення АЕС
         public void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
@@ -33,10 +33,9 @@ namespace WindowsFormsApp1
                 checkBox2.Checked = false;
                 checkBox5.Checked = false;
                 checkBox6.Checked = false;
-                // Додаткова логіка, яка виконується, коли checkbox1 вибраний
             }
         }
-
+        //ручне заповнення АЕС
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
@@ -44,10 +43,64 @@ namespace WindowsFormsApp1
                 checkBox1.Checked = false;
                 checkBox5.Checked = false;
                 checkBox6.Checked = false;
-                // Додаткова логіка, яка виконується, коли checkbox2 вибраний
             }
         }
 
+        //автоматичне заповнення ПС
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (checkBox3.Checked)
+            {
+                checkBox4.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
+            }
+        }
+        //ручне заповнення ПС
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked)
+            {
+                checkBox3.Checked = false;
+                checkBox5.Checked = false;
+                checkBox6.Checked = false;
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                checkBox6.Checked = true;
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                checkBox4.Checked = false;
+            }
+            else if (checkBox5.Checked == false)
+            {
+                checkBox6.Checked = false;
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                checkBox5.Checked = true;
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+                checkBox4.Checked = false;
+            }
+            else if (checkBox6.Checked == false)
+            {
+                checkBox5.Checked = false;
+            }
+        }
+
+        //кількість АЕС
         public void textBox1_TextChanged(object sender, EventArgs e)
         {
             textBox1.KeyPress += textBox_KeyPress;
@@ -60,7 +113,7 @@ namespace WindowsFormsApp1
                 
             }
         }
-
+        // кількість ПС
         public void textBox2_TextChanged(object sender, EventArgs e)
         {
             textBox2.KeyPress += textBox_KeyPress;
@@ -73,29 +126,7 @@ namespace WindowsFormsApp1
                
             }
         }
-
-        private void checkBox3_CheckedChanged(object sender, EventArgs e)
-        {
-
-            if (checkBox3.Checked)
-            {
-                checkBox4.Checked = false;
-                checkBox5.Checked = false;
-                checkBox6.Checked = false;
-                // Додаткова логіка, яка виконується, коли checkbox1 вибраний
-            }
-        }
-
-        private void checkBox4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox4.Checked)
-            {
-                checkBox3.Checked = false;
-                checkBox5.Checked = false;
-                checkBox6.Checked = false;
-                // Додаткова логіка, яка виконується, коли checkbox2 вибраний
-            }
-        }
+        
 
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -145,42 +176,6 @@ namespace WindowsFormsApp1
 
 
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox5.Checked == true)
-            {
-                checkBox6.Checked = true;
-                checkBox1.Checked = false;
-                checkBox2.Checked = false;
-                checkBox3.Checked = false;
-                checkBox4.Checked = false;
-            }
-            else if (checkBox5.Checked == false)
-            {
-                checkBox6.Checked = false;
-            }
-        }
-
-        private void checkBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox6.Checked == true)
-            {
-                checkBox5.Checked = true;
-                checkBox1.Checked = false;
-                checkBox2.Checked = false;
-                checkBox3.Checked = false;
-                checkBox4.Checked = false;
-            }
-            else if (checkBox6.Checked == false)
-            {
-                checkBox5.Checked = false;
-            }
-        }
+        
     }
 }

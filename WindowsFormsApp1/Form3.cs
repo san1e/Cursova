@@ -19,10 +19,8 @@ namespace WindowsFormsApp1
         int[] XAEC_;
         int[] YAEC_;
         int[] R_;
-        int[] XOP_;
-        int[] YOP_;
         int NumAEC_;
-        int NumOP_;
+        
         public void P_Aec(int NumAEC, int[] XAEC, int[] YAEC)
         {
             PicAEC = new PictureBox[NumAEC];
@@ -58,43 +56,18 @@ namespace WindowsFormsApp1
         public Form3(int[] R, int[] XAEC, int[] YAEC, int[] XOP, int[] YOP, int NumAEC, int NumOP)
         {
             InitializeComponent();
-            this.R_ = R;
-            this.XAEC_ = XAEC;
-            this.YAEC_ = YAEC;
-            this.NumAEC_ = NumAEC;
-            this.XOP_= XOP;
-            this.YOP_= YOP;
-            this.NumOP_ = NumOP;
+            R_ = R;
+            XAEC_ = XAEC;
+            YAEC_ = YAEC;
+            NumAEC_ = NumAEC;
 
             P_Op(NumOP, XOP, YOP);
             P_Aec(NumAEC, XAEC, YAEC);
+
+            Res();
         }
-        private void Form3_Load(object sender, EventArgs e)
+        private void Res()
         {
-
-        }
-
-        static bool IsPointInCircle(int pointX, int pointY, int circleX, int circleY, int radius)
-        {
-            double distance = Math.Sqrt(Math.Pow(pointX - circleX, 2) + Math.Pow(pointY - circleY, 2));
-            return distance <= radius;
-        }
-
-        private void Form3_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-           
-            for (int i = 0; i < NumAEC_; i++)
-            {
-                int x = XAEC_[i] - (R_[i]);
-                int y = YAEC_[i] - (R_[i]);
-                int R = R_[i];
-
-                Rectangle clipRect = new Rectangle(0, 0, 750, 750);
-                g.SetClip(clipRect);
-                g.DrawArc(new Pen(Color.Black, 5), x, y, R*2, R*2, 0, 360);
-                g.ResetClip();
-            }
             int[] res1 = new int[NumAEC_];
             int opNotInAnyCircleCount = 0;
             int opInMultipleCirclesCount = 0;
@@ -131,8 +104,6 @@ namespace WindowsFormsApp1
 
             }
 
-
-
             Label[] labels = new Label[NumAEC_];
             for (int i = 0; i < NumAEC_; i++)
             {
@@ -154,6 +125,29 @@ namespace WindowsFormsApp1
             l1.Text = $"Кількість пунктів спостереження, які знаходяться на перетені: {opInMultipleCirclesCount}";
             l1.AutoSize = true;
             Controls.Add(l1);
+        }
+
+        static bool IsPointInCircle(int pointX, int pointY, int circleX, int circleY, int radius)
+        {
+            double distance = Math.Sqrt(Math.Pow(pointX - circleX, 2) + Math.Pow(pointY - circleY, 2));
+            return distance <= radius;
+        }
+
+        private void Form3_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+           
+            for (int i = 0; i < NumAEC_; i++)
+            {
+                int x = XAEC_[i] - (R_[i]);
+                int y = YAEC_[i] - (R_[i]);
+                int R = R_[i];
+
+                Rectangle clipRect = new Rectangle(0, 0, 750, 750);
+                g.SetClip(clipRect);
+                g.DrawArc(new Pen(Color.Black, 5), x, y, R*2, R*2, 0, 360);
+                g.ResetClip();
+            }
 
             for (int i = 50; i <= 750; i +=50)
             {
@@ -161,8 +155,5 @@ namespace WindowsFormsApp1
                 g.DrawLine(new Pen(Color.Black), 0, i, 750, i);
             }
         }
-
-       
-        
     }
 }
