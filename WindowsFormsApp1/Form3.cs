@@ -20,7 +20,9 @@ namespace WindowsFormsApp1
         int[] YAEC_;
         int[] R_;
         int NumAEC_;
-        
+        int opInMultipleCirclesCount_ = 0;
+        int builtObservationPointsCount = 0;
+
         public void P_Aec(int NumAEC, int[] XAEC, int[] YAEC)
         {
             PicAEC = new PictureBox[NumAEC];
@@ -100,6 +102,7 @@ namespace WindowsFormsApp1
                 if (circlesContainingOP[i] > 1)
                 {
                     opInMultipleCirclesCount++;
+                    opInMultipleCirclesCount_++;
                 }
 
             }
@@ -133,6 +136,51 @@ namespace WindowsFormsApp1
             return distance <= radius;
         }
 
+        private void P_OP_Out(int x, int y)
+        {
+            PictureBox PicOP = new PictureBox();
+            PicOP.Image = Properties.Resources.OP_;
+            PicOP.Size = new Size(21, 21);
+            PicOP.BackColor = Color.White;
+            PicOP.SizeMode = PictureBoxSizeMode.Zoom;
+            PicOP.Location = new Point(x - PicOP.Width / 2, y - PicOP.Height / 2);
+            Controls.Add(PicOP);
+        }
+
+        private void OutSideOP()
+        {
+            if (builtObservationPointsCount >= opInMultipleCirclesCount_)
+            {
+                MessageBox.Show($"Досягнуто максимальну кількість точок: {opInMultipleCirclesCount_}");
+                return;
+            }
+
+            Random rnd = new Random();
+            int x = rnd.Next(1, 15) * 50;
+            int y = rnd.Next(1, 15) * 50;
+
+            // Перевірка, чи точка поза межами будь-якого кола
+            bool outsideCircles = true;
+            for (int j = 0; j < NumAEC_; j++)
+            {
+                int xAEC = XAEC_[j];
+                int yAEC = YAEC_[j];
+                int radiusAEC = R_[j];
+                if (IsPointInCircle(x, y, xAEC, yAEC, radiusAEC))
+                {
+                    outsideCircles = false;
+                    break;
+                }
+            }
+
+            // Якщо точка поза межами всіх кол та кількість ще не досягла ліміту, то вивести її
+            if (outsideCircles)
+            {
+                P_OP_Out(x, y);
+                builtObservationPointsCount++;
+            }
+        }
+
         private void Form3_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -154,6 +202,16 @@ namespace WindowsFormsApp1
                 g.DrawLine(new Pen(Color.Black), i, 0, i, 750);
                 g.DrawLine(new Pen(Color.Black), 0, i, 750, i);
             }
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OutSideOP();
         }
     }
 }

@@ -23,6 +23,8 @@ namespace WindowsFormsApp1
         private List<int> XOP = new List<int>();
         private List<int> YOP = new List<int>();
         int[] R_;
+        int opInMultipleCirclesCount_ = 0;
+        int builtObservationPointsCount = 0;
 
 
         public Form4(int[] R, int NumAEC, int NumOP)
@@ -123,9 +125,8 @@ namespace WindowsFormsApp1
         {
             int[] res1 = new int[NumAEC_];
             int opNotInAnyCircleCount = 0;
-            int opInMultipleCirclesCount = 0;
             int[] circlesContainingOP = new int[NumOP_];
-
+            int opInMultipleCirclesCount = 0;
             for (int i = 0; i < XOP.Count; i++)
             {
                 int xOP = XOP[i] + (21 / 2);
@@ -149,11 +150,17 @@ namespace WindowsFormsApp1
 
                 if (circlesContainingOP[i] > 1)
                 {
+                    opInMultipleCirclesCount_++;
                     opInMultipleCirclesCount++;
                 }
 
             }
+            ResOutput(res1,opNotInAnyCircleCount,opInMultipleCirclesCount);
 
+        }
+
+        private void ResOutput(int[] res1,int opNotInAnyCircleCount, int opInMultipleCirclesCount)
+        {
             Label[] labels = new Label[NumAEC_];
             for (int i = 0; i < NumAEC_; i++)
             {
@@ -176,11 +183,51 @@ namespace WindowsFormsApp1
             l1.AutoSize = true;
             Controls.Add(l1);
         }
+
+        
+
+        private void OutSideOP()
+        {
+            if (builtObservationPointsCount >= opInMultipleCirclesCount_)
+            {
+                MessageBox.Show($"Досягнуто максимальну кількість точок: {opInMultipleCirclesCount_}");
+                return;
+            }
+
+            Random rnd = new Random();
+            int x = rnd.Next(1, 15) * 50;
+            int y = rnd.Next(1, 15) * 50;
+
+            // Перевірка, чи точка поза межами будь-якого кола
+            bool outsideCircles = true;
+            for (int j = 0; j < NumAEC_; j++)
+            {
+                int xAEC = XAEC[j];
+                int yAEC = YAEC[j];
+                int radiusAEC = R_[j];
+                if (IsPointInCircle(x, y, xAEC, yAEC, radiusAEC))
+                {
+                    outsideCircles = false;
+                    break;
+                }
+            }
+
+            // Якщо точка поза межами всіх кол та кількість ще не досягла ліміту, то вивести її
+            if (outsideCircles)
+            {
+                P_OP(x, y);
+                builtObservationPointsCount++;
+            }
+        }
         static bool IsPointInCircle(int pointX, int pointY, int circleX, int circleY, int radius)
         {
             double distance = Math.Sqrt(Math.Pow(pointX - circleX, 2) + Math.Pow(pointY - circleY, 2));
             return distance <= radius;
         }
+
+
+
+        
         private void MainForm_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -210,9 +257,31 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Res();
+            if (XAEC.Count < NumAEC_)
+            {
+                MessageBox.Show("Не всі АЕС знаходяться на координатній площині");
+            }
+            else if (XOP.Count < NumOP_)
+            {
+                MessageBox.Show("Не всі ПС знаходяться на координатній площині");
+            }
+            else
+            {
+                Res();
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+            }
         }
 
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+                OutSideOP();
+        }
     }
 }
 
