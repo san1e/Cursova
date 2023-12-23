@@ -174,10 +174,11 @@ namespace WindowsFormsApp1
             do
             {
                 // Виберіть випадкову точку на колі або в його центрі
-                int randomCircleIndex = rnd.Next(NumAEC_);
-                int xAEC = XAEC_[randomCircleIndex];
-                int yAEC = YAEC_[randomCircleIndex];
-                int radiusAEC = R_[randomCircleIndex];
+                int randomCircleIndex1 = rnd.Next(NumAEC_);
+                int randomCircleIndex2 = rnd.Next(NumAEC_);
+                int xAEC = (XAEC_[randomCircleIndex1] + XAEC_[randomCircleIndex2]) / 2;
+                int yAEC = (YAEC_[randomCircleIndex1] + YAEC_[randomCircleIndex2]) / 2;
+                int radiusAEC = (R_[randomCircleIndex1] + R_[randomCircleIndex2]) / 2;
 
                 double angle = rnd.NextDouble() * 2 * Math.PI;
                 double distance = rnd.Next(radiusAEC + 1, 2 * radiusAEC); // Виберіть випадковий радіус
@@ -188,7 +189,6 @@ namespace WindowsFormsApp1
                 // Округлення координат до 50
                 x = RoundToNearest(x, 50);
                 y = RoundToNearest(y, 50);
-
                 if (x < 0)
                 {
                     x *= -1;
@@ -231,24 +231,14 @@ namespace WindowsFormsApp1
                     }
                 }
 
-                for (int j = 0; j < opInMultipleCirclesCount_; j++)
-                {
-                    int opIndex = opInMultipleCirclesIndexes[j];
-                    int opX = XOP_[opIndex];
-                    int opY = YOP_[opIndex];
-
-                    if (IsPointInCircle(x, y, opX, opY, 21 / 2)) // 21 / 2 - радіус OP
-                    {
-                        outsideCircles = false;
-                        break;
-                    }
-                }
 
             } while (!outsideCircles);
 
             // Якщо точка поза межами всіх кол та кількість ще не досягла ліміту, то вивести її
+
             P_OP_Out(x, y);
             builtObservationPointsCount++;
+
         }
         private int RoundToNearest(int value, int roundTo)
         {

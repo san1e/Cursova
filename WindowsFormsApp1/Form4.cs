@@ -218,10 +218,11 @@ namespace WindowsFormsApp1
             do
             {
                 // Виберіть випадкову точку на колі або в його центрі
-                int randomCircleIndex = rnd.Next(NumAEC_);
-                int xAEC = XAEC[randomCircleIndex];
-                int yAEC = YAEC[randomCircleIndex];
-                int radiusAEC = R_[randomCircleIndex];
+                int randomCircleIndex1 = rnd.Next(NumAEC_);
+                int randomCircleIndex2 = rnd.Next(NumAEC_);
+                int xAEC = (XAEC[randomCircleIndex1]+XAEC[randomCircleIndex2])/2;
+                int yAEC = (YAEC[randomCircleIndex1] + YAEC[randomCircleIndex2]) / 2;
+                int radiusAEC = (R_[randomCircleIndex1]+R_[randomCircleIndex2])/2;
 
                 double angle = rnd.NextDouble() * 2 * Math.PI;
                 double distance = rnd.Next(radiusAEC + 1, 2 * radiusAEC); // Виберіть випадковий радіус
@@ -274,18 +275,6 @@ namespace WindowsFormsApp1
                     }
                 }
 
-                for (int j = 0; j < opInMultipleCirclesCount_; j++)
-                {
-                    int opIndex = opInMultipleCirclesIndexes[j];
-                    int opX = XOP[opIndex];
-                    int opY = YOP[opIndex];
-
-                    if (IsPointInCircle(x, y, opX, opY, 21 / 2)) // 21 / 2 - радіус OP
-                    {
-                        outsideCircles = false;
-                        break;
-                    }
-                }
 
             } while (!outsideCircles);
 
