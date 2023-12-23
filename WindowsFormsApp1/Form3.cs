@@ -270,12 +270,12 @@ namespace WindowsFormsApp1
         }
 
         private void Form3_Load(object sender, EventArgs e)
-        {
+        { 
 
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        { 
             OutSideOP();
         }
     }
