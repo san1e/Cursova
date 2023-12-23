@@ -22,7 +22,9 @@ namespace WindowsFormsApp1
         private List<int> YAEC = new List<int>();
         private List<int> XOP = new List<int>();
         private List<int> YOP = new List<int>();
-        private List<int> intersectingAECIndices = new List<int>();
+
+        List<int> intersectingCircles = new List<int>();
+        List<int> opInMultipleCirclesIndexes = new List<int>();
         int[] R_;
         int opInMultipleCirclesCount_ = 0;
         int builtObservationPointsCount = 0;
@@ -40,26 +42,29 @@ namespace WindowsFormsApp1
             NumOP_ = NumOP;
             this.MouseDown += MainForm_MouseDown;
             this.Paint += MainForm_Paint;
-            
-            
+            button2.Enabled = false;
+
+
         }
 
 
         private void MainForm_MouseDown(object sender, MouseEventArgs e)
         {
             {
-                int roundedX = (int)(Math.Round((double)e.X / 50) * 50);
-                int roundedY = (int)(Math.Round((double)e.Y / 50) * 50);
+                int X = e.X;
+                int Y = e.Y;
+                X = RoundToNearest(X, 50);
+                Y = RoundToNearest(Y, 50);
 
-                if (roundedX >= 0 && roundedX <= 750 && roundedY >= 0 && roundedY <= 750)
+                if (X >= 0 && X <= 750 && Y >= 0 && Y <= 750)
                 {
                     if (checkBox1.Checked == true)
                     {
                         if (XAEC.Count < NumAEC_)
                         {
-                            XAEC.Add(roundedX);
-                            YAEC.Add(roundedY);
-                            P_AEC(roundedX, roundedY);
+                            XAEC.Add(X);
+                            YAEC.Add(Y);
+                            P_AEC(X, Y);
                         }
                         else
                         {
@@ -70,9 +75,9 @@ namespace WindowsFormsApp1
                     {
                         if (XOP.Count < NumOP_)
                         {
-                            XOP.Add(roundedX);
-                            YOP.Add(roundedY);
-                            P_OP(roundedX, roundedY);
+                            XOP.Add(X);
+                            YOP.Add(Y);
+                            P_OP(X, Y);
                         }
                         else
                         {
@@ -141,7 +146,7 @@ namespace WindowsFormsApp1
                     {
                         res1[j]++;
                         circlesContainingOP[i]++;
-                        intersectingAECIndices.Add(j);
+                        intersectingCircles.Add(j);
 
                     }
                 }
@@ -152,6 +157,7 @@ namespace WindowsFormsApp1
 
                 if (circlesContainingOP[i] > 1)
                 {
+                    opInMultipleCirclesIndexes.Add(i);
                     opInMultipleCirclesCount_++;
                 }
 
@@ -191,7 +197,10 @@ namespace WindowsFormsApp1
         }
 
 
-
+        private int RoundToNearest(int value, int roundTo)
+        {
+            return (int)(Math.Round((double)value / roundTo) * roundTo);
+        }
         private void OutSideOP()
         {
             if (builtObservationPointsCount >= opInMultipleCirclesCount_)
@@ -201,30 +210,96 @@ namespace WindowsFormsApp1
             }
 
             Random rnd = new Random();
-            int x = rnd.Next(1, 15) * 50;
-            int y = rnd.Next(1, 15) * 50;
 
             // Перевірка, чи точка поза межами будь-якого кола
             bool outsideCircles = true;
-            for (int j = 0; j < NumAEC_; j++)
+            int x, y;
+
+            do
             {
-                int xAEC = XAEC[j];
-                int yAEC = YAEC[j];
-                int radiusAEC = R_[j];
-                if (IsPointInCircle(x, y, xAEC, yAEC, radiusAEC))
+                // Виберіть випадкову точку на колі або в його центрі
+                int randomCircleIndex = rnd.Next(NumAEC_);
+                int xAEC = XAEC[randomCircleIndex];
+                int yAEC = YAEC[randomCircleIndex];
+                int radiusAEC = R_[randomCircleIndex];
+
+                double angle = rnd.NextDouble() * 2 * Math.PI;
+                double distance = rnd.Next(radiusAEC + 1, 2 * radiusAEC); // Виберіть випадковий радіус
+
+                x = (int)(xAEC + distance * Math.Cos(angle));
+                y = (int)(yAEC + distance * Math.Sin(angle));
+                
+                // Округлення координат до 50
+                x = RoundToNearest(x, 50);
+                y = RoundToNearest(y, 50);
+                if (x < 0)
                 {
-                    outsideCircles = false;
-                    break;
+                    x *= -1;
                 }
-            }
+                else if (y < 0)
+                {
+                    y *= -1;
+                }
+                else if (x == 0)
+                {
+                    x += rnd.Next(1, 15) * 50;
+                }
+                else if (y == 0)
+                {
+                    y += rnd.Next(1, 15) * 50;
+
+                }
+                else if (x > 750)
+                {
+                    x = 750;
+                }
+                else if (y > 750)
+                {
+                    y = 750;
+                }
+
+                // Перевірте, чи точка знаходиться в межах всіх кол та точок перетину
+                outsideCircles = true;
+
+                for (int j = 0; j < NumAEC_; j++)
+                {
+                    int otherXAEC = XAEC[j];
+                    int otherYAEC = YAEC[j];
+                    int otherRadiusAEC = R_[j];
+
+                    if (IsPointInCircle(x, y, otherXAEC, otherYAEC, otherRadiusAEC))
+                    {
+                        outsideCircles = false;
+                        break;
+                    }
+                }
+
+                for (int j = 0; j < opInMultipleCirclesCount_; j++)
+                {
+                    int opIndex = opInMultipleCirclesIndexes[j];
+                    int opX = XOP[opIndex];
+                    int opY = YOP[opIndex];
+
+                    if (IsPointInCircle(x, y, opX, opY, 21 / 2)) // 21 / 2 - радіус OP
+                    {
+                        outsideCircles = false;
+                        break;
+                    }
+                }
+
+            } while (!outsideCircles);
 
             // Якщо точка поза межами всіх кол та кількість ще не досягла ліміту, то вивести її
-            if (outsideCircles)
-            {
+           
                 P_OP(x, y);
                 builtObservationPointsCount++;
-            }
+            
         }
+
+       
+
+
+
         static bool IsPointInCircle(int pointX, int pointY, int circleX, int circleY, int radius)
         {
             double distance = Math.Sqrt(Math.Pow(pointX - circleX, 2) + Math.Pow(pointY - circleY, 2));
@@ -277,6 +352,9 @@ namespace WindowsFormsApp1
                 checkBox1.Checked = false;
                 checkBox2.Checked = false;
             }
+            button2.Enabled = true;
+            button1.Enabled = false;
+
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -286,7 +364,6 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-
                 OutSideOP();
         }
     }
