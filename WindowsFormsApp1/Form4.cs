@@ -22,6 +22,7 @@ namespace WindowsFormsApp1
         private List<int> YAEC = new List<int>();
         private List<int> XOP = new List<int>();
         private List<int> YOP = new List<int>();
+        private List<int> intersectingAECIndices = new List<int>();
         int[] R_;
         int opInMultipleCirclesCount_ = 0;
         int builtObservationPointsCount = 0;
@@ -126,7 +127,6 @@ namespace WindowsFormsApp1
             int[] res1 = new int[NumAEC_];
             int opNotInAnyCircleCount = 0;
             int[] circlesContainingOP = new int[NumOP_];
-            int opInMultipleCirclesCount = 0;
             for (int i = 0; i < XOP.Count; i++)
             {
                 int xOP = XOP[i] + (21 / 2);
@@ -141,6 +141,8 @@ namespace WindowsFormsApp1
                     {
                         res1[j]++;
                         circlesContainingOP[i]++;
+                        intersectingAECIndices.Add(j);
+
                     }
                 }
                 if (circlesContainingOP[i] == 0)
@@ -151,13 +153,14 @@ namespace WindowsFormsApp1
                 if (circlesContainingOP[i] > 1)
                 {
                     opInMultipleCirclesCount_++;
-                    opInMultipleCirclesCount++;
                 }
 
             }
-            ResOutput(res1,opNotInAnyCircleCount,opInMultipleCirclesCount);
+            ResOutput(res1,opNotInAnyCircleCount,opInMultipleCirclesCount_);
 
         }
+
+     
 
         private void ResOutput(int[] res1,int opNotInAnyCircleCount, int opInMultipleCirclesCount)
         {
@@ -182,9 +185,12 @@ namespace WindowsFormsApp1
             l1.Text = $"Кількість пункітв спостереження, які знаходяться на перетені: {opInMultipleCirclesCount}";
             l1.AutoSize = true;
             Controls.Add(l1);
+
+
+
         }
 
-        
+
 
         private void OutSideOP()
         {
@@ -280,6 +286,7 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
+
                 OutSideOP();
         }
     }
