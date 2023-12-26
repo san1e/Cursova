@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form4 : Form
+    public partial class OutputWindow2 : Form
     {
 
         int NumAEC_;
@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
         int builtObservationPointsCount = 0;
 
 
-        public Form4(int[] R, int NumAEC, int NumOP)
+        public OutputWindow2(int[] R, int NumAEC, int NumOP)
         {
             InitializeComponent();
             R_ = new int[R.Length];

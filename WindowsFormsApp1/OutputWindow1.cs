@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form3 : Form
+    public partial class OutputWindow1 : Form
     {
         public PictureBox[] PicOP;
         public PictureBox[] PicAEC;
@@ -60,7 +60,7 @@ namespace WindowsFormsApp1
                 Controls.Add(PicOP[i]);
             }
         }
-        public Form3(int[] R, int[] XAEC, int[] YAEC, int[] XOP, int[] YOP, int NumAEC, int NumOP)
+        public OutputWindow1(int[] R, int[] XAEC, int[] YAEC, int[] XOP, int[] YOP, int NumAEC, int NumOP)
         {
             InitializeComponent();
             R_ = R;

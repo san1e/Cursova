@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form2 : Form
+    public partial class InputWindow : Form
     {
 
         public TextBox[] Radius;
@@ -67,13 +67,7 @@ namespace WindowsFormsApp1
                 Radius[i].KeyPress += textBox_KeyPress;
                 Radius[i].TextChanged += RadiusTextBox_TextChanged;
 
-                if (!string.IsNullOrEmpty(Radius[i].Text))
-                {
-                    if (int.TryParse(Radius[i].Text, out int b))
-                    {
-                        R[i] = b;
-                    }
-                }
+               
             }
         }
 
@@ -144,14 +138,7 @@ namespace WindowsFormsApp1
                 LocationX[i].KeyPress += textBox_KeyPress;
                 LocationY[i].KeyPress += textBox_KeyPress;
 
-                if (!string.IsNullOrEmpty(LocationX[i].Text) & !string.IsNullOrEmpty(LocationY[i].Text))
-                {
-                    if (int.TryParse(LocationX[i].Text, out int x) & int.TryParse(LocationY[i].Text, out int y))
-                    {
-                        XAEC[i] = x;
-                        YAEC[i] = y;
-                    }
-                }
+                
             }
         }
 
@@ -208,18 +195,11 @@ namespace WindowsFormsApp1
 
                 LocationOPX[i].KeyPress += textBox_KeyPress;
                 LocationOPY[i].KeyPress += textBox_KeyPress;
-                if (!string.IsNullOrEmpty(LocationOPX[i].Text) & !string.IsNullOrEmpty(LocationOPY[i].Text))
-                {
-                    if (int.TryParse(LocationOPX[i].Text, out int x) & int.TryParse(LocationOPY[i].Text, out int y))
-                    {
-                        XOP[i] = x;
-                        YOP[i] = y;
-                    }
-                }
+                
             }
         }
 
-        public Form2(int NumAEC,int NumOP,bool checekd1, bool checked2,bool checked3, bool checked4, bool checked5)
+        public InputWindow(int NumAEC,int NumOP,bool checekd1, bool checked2,bool checked3, bool checked4, bool checked5)
         {
             InitializeComponent();
             Radius = new TextBox[NumAEC];
@@ -423,13 +403,13 @@ namespace WindowsFormsApp1
 
             if (!validationFailed && ck5 == false)
             {
-                Form3 f3 = new Form3(R, XAEC, YAEC, XOP, YOP, NAEC, NOP);
+                OutputWindow1 f3 = new OutputWindow1(R, XAEC, YAEC, XOP, YOP, NAEC, NOP);
                 f3.AutoSize = true;
                 f3.Show();
             }
             else if (!validationFailed && ck5 == true)
             {
-                Form4 f4 = new Form4(R,NAEC,NOP);
+                OutputWindow2 f4 = new OutputWindow2(R,NAEC,NOP);
                 f4.AutoSize = true;
                 f4.Show();
             }

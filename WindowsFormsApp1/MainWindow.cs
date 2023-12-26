@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         public int NumAEC;
 
         public int NumOP;
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
             
@@ -169,7 +169,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Form2 f2 = new Form2(NumAEC, NumOP, checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked,checkBox5.Checked);
+                InputWindow f2 = new InputWindow(NumAEC, NumOP, checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, checkBox4.Checked,checkBox5.Checked);
                 f2.AutoSize = true;
                 f2.Show();
             }
