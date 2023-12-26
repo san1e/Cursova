@@ -173,15 +173,17 @@ namespace WindowsFormsApp1
 
             do
             {
-                // Виберіть випадкову точку на колі або в його центрі
+                // обираємо рандомно АЕС від якого будемо рівновіддалено будвати ПС(пункт спостереження)
                 int randomCircleIndex1 = rnd.Next(NumAEC_);
                 int randomCircleIndex2 = rnd.Next(NumAEC_);
+                //обчислюємо координати для майбутнього ПС
                 int xAEC = (XAEC_[randomCircleIndex1] + XAEC_[randomCircleIndex2]) / 2;
                 int yAEC = (YAEC_[randomCircleIndex1] + YAEC_[randomCircleIndex2]) / 2;
+                //обчислюємо відстань на якій буде знаходитися ПС, так щоб він не потрапив в радіус
                 int radiusAEC = (R_[randomCircleIndex1] + R_[randomCircleIndex2]) / 2;
-
+                //додаємо можливість будувати ПС рівновіддалено по всій площині 
                 double angle = rnd.NextDouble() * 2 * Math.PI;
-                double distance = rnd.Next(radiusAEC + 1, 2 * radiusAEC); // Виберіть випадковий радіус
+                double distance = rnd.Next(radiusAEC + 1, 2 * radiusAEC); 
 
                 x = (int)(xAEC + distance * Math.Cos(angle));
                 y = (int)(yAEC + distance * Math.Sin(angle));
@@ -189,6 +191,7 @@ namespace WindowsFormsApp1
                 // Округлення координат до 50
                 x = RoundToNearest(x, 50);
                 y = RoundToNearest(y, 50);
+                //додаткові логічні перевірки
                 if (x < 0)
                 {
                     x *= -1;
@@ -216,8 +219,6 @@ namespace WindowsFormsApp1
                 }
 
                 // Перевірте, чи точка знаходиться в межах всіх кол та точок перетину
-                outsideCircles = true;
-
                 for (int j = 0; j < NumAEC_; j++)
                 {
                     int otherXAEC = XAEC_[j];
