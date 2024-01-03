@@ -191,33 +191,7 @@ namespace WindowsFormsApp1
                 // Округлення координат до 50
                 x = RoundToNearest(x, 50);
                 y = RoundToNearest(y, 50);
-                //додаткові логічні перевірки
-                if (x < 0)
-                {
-                    x *= -1;
-                }
-                else if (y < 0)
-                {
-                    y *= -1;
-                }
-                else if (x == 0)
-                {
-                    x += rnd.Next(1, 15) * 50;
-                }
-                else if (y == 0)
-                {
-                    y += rnd.Next(1, 15) * 50;
-
-                }
-                else if (x > 750)
-                {
-                    x = 750;
-                }
-                else if (y > 750)
-                {
-                    y = 750;
-                }
-
+              
                 // Перевірте, чи точка знаходиться в межах всіх кол та точок перетину
                 for (int j = 0; j < NumAEC_; j++)
                 {
