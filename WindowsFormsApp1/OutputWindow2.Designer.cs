@@ -410,9 +410,9 @@
             this.checkBox2.Location = new System.Drawing.Point(1654, 375);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(92, 40);
+            this.checkBox2.Size = new System.Drawing.Size(342, 40);
             this.checkBox2.TabIndex = 63;
-            this.checkBox2.Text = "ПС";
+            this.checkBox2.Text = "ПУНКТ КОНТРОЛЮ";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
