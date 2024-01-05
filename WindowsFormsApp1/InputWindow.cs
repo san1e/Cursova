@@ -380,7 +380,7 @@ namespace WindowsFormsApp1
             {
                 if (XOP[i] == 0 && ck5 == false)
                 {
-                    MessageBox.Show($"Введіть значення для ПС Х{i + 1}");
+                    MessageBox.Show($"Введіть значення для пункту контролю Х{i + 1}");
                     validationFailed = true;
                 }
                 else if (YOP[i] == 0 && ck5 == false)

@@ -145,7 +145,7 @@ namespace WindowsFormsApp1
             }
             else if (checkBox3.Checked == false && checkBox4.Checked == false && checkBox5.Checked == false)
             {
-                MessageBox.Show("Оберіть варіант заповнення для ПС");
+                MessageBox.Show("Оберіть варіант заповнення для пунктів контролю");
             }
             else if (NumAEC > 4)
             {
@@ -154,7 +154,7 @@ namespace WindowsFormsApp1
             }
             else if (NumOP > 10)
             {
-                MessageBox.Show("Введіть меньшу кількість ПС");
+                MessageBox.Show("Введіть меньшу кількість пунктів контролю");
 
             }
             else if (NumAEC == 0)
@@ -164,7 +164,7 @@ namespace WindowsFormsApp1
             }
             else if (NumOP == 0)
             {
-                MessageBox.Show("Введіть кількість ПС");
+                MessageBox.Show("Введіть кількість пунктів контролю");
 
             }
             else

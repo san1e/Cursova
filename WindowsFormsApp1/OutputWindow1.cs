@@ -120,20 +120,20 @@ namespace WindowsFormsApp1
             {
                 labels[i] = new Label();
                 labels[i].Location = new Point(920, 40 + i * 20);
-                labels[i].Text = $"Кількість пунктів спостереження, які потрапили в радіус АЕС {i + 1}: {res1[i]}";
+                labels[i].Text = $"Кількість пунктів контролю, які потрапили в радіус АЕС {i + 1}: {res1[i]}";
                 labels[i].AutoSize = true;
                 Controls.Add(labels[i]);
             }
 
             Label l = new Label();
             l.Location = new Point(920, 20);
-            l.Text = $"Кількість пунктів спостереження, які не використовуються: {opNotInAnyCircleCount}";
+            l.Text = $"Кількість пунктів контролю, які не використовуються: {opNotInAnyCircleCount}";
             l.AutoSize = true;
             Controls.Add(l);
 
             Label l1 = new Label();
             l1.Location = new Point(920, 0);
-            l1.Text = $"Кількість пункітв спостереження, які знаходяться на перетені: {opInMultipleCirclesCount}";
+            l1.Text = $"Кількість пункітв контролю, які знаходяться на перетені: {opInMultipleCirclesCount}";
             l1.AutoSize = true;
             Controls.Add(l1);
 
